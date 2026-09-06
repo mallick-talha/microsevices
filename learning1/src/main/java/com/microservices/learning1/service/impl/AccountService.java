@@ -9,12 +9,14 @@ import com.microservices.learning1.mapper.CustomerMapper;
 import com.microservices.learning1.repository.AccountRepository;
 import com.microservices.learning1.repository.CustomerRepository;
 import com.microservices.learning1.service.IAccountsService;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Random;
-
-@Setter
+@Service
+@AllArgsConstructor
 public class AccountService implements IAccountsService {
 
     private AccountRepository accountRepository;
@@ -27,6 +29,8 @@ public class AccountService implements IAccountsService {
         if(byMobileNumber.isPresent()){
             throw new CustomerAlreadyExistException("Customer is already registered with given mobile number"+customer.getMobileNumber());
         }
+        customer.setCreatedAt(LocalDate.now());
+        customer.setCreatedBy(customer.getName());
         customerRepository.save(customer);
         accountRepository.save(createNewAccount(customer));
     }

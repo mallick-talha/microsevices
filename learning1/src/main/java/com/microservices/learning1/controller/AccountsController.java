@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountsController {
     public AccountService accountService;
 
-
     @PostMapping
     public ResponseEntity<ResponseDto>createAccount(@RequestBody CustomerDto dto){
      accountService.createAccount(dto);
