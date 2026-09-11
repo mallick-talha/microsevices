@@ -23,4 +23,6 @@ public class Customer extends BaseEntity {
 
     @Column(name = "mobile_number", length = 20)
     private String mobileNumber;
+
+
 }
